@@ -1,0 +1,103 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+alias ls='ls --color=auto'
+
+#ping www.google.com
+alias pg='ping -c1 www.google.com'
+
+# fzf
+source /usr/share/fzf/key-bindings.bash
+#source /usr/share/fzf/completion.bash
+
+# upgrade
+alias up='sudo pacman -Syyu'
+
+#PS1='[\u@\h \W]\$ '
+# my prompt
+PS1="\[\033[32m\]  \[\033[37m\]\[\033[34m\]\w \[\033[0m\]"
+PS2="\[\033[32m\]  > \[\033[0m\]"
+
+# bash history unlimited 
+HISTSIZE= 
+HISTFILESIZE=
+
+# yay
+alias yp="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
+
+#logo-ls
+# alias ld='logo-ls'
+alias la='logo-ls -A'
+alias ll='logo-ls -al'
+
+alias nn='nvim'
+alias rn='ranger'
+
+#mpd
+alias kek=" killall mpd ncmpcpp ncmpcpp_cover_art.sh"
+alias mpd=" mpd && ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug"
+alias np="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug"
+
+# mpv
+alias au='mpv --no-video'
+# youtube-dl to download stuffs
+alias yt='youtube-dl --extract-audio --add-metadata --xattrs --embed-thumbnail --audio-quality 0 --audio-format mp3'
+alias ytv='youtube-dl --merge-output-format mp4 -f "bestvideo+bestaudio[ext=m4a]/best" --embed-thumbnail --add-metadata'
+
+# Environment variables set everywhere
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="firefox"
+
+# XDG Paths
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+# System
+alias sus='systemctl suspend'
+alias rw='systemctl restart NetworkManager'
+alias die='systemctl poweroff'
+alias cb='cbonsai -S'
+
+#CPU
+alias perf="sudo cpupower -c all frequency-set -g performance"
+alias pow="sudo cpupower -c all frequency-set -g powersave"
+alias nor="sudo cpupower -c all frequency-set -g schedutil"
+# alias lsf="cpupower -c all frequency-info"
+alias lsf="cpupower frequency-info | grep gov | tail -n1"
+
+b (){
+  xrandr --output eDP --brightness 0."$1"
+}
+
+# less color support
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# source venv
+alias va='source ./venv/bin/activate'
+alias iv='python ../virtualenv.pyz venv'
+ch (){
+  curl cht.sh/"$1"/"$2"
+}
+
+# web/app dev
+alias pog='systemctl start postgresql'
+alias red='systemctl start redis'
+alias ssadb='sudo adb start-server'
+alias dock='systemctl start docker'
+alias xiao='cd /run/user/1000/gvfs/mtp:host=Xiaomi_SDM660-MTP__SN%3A6F81A59D_5b43ccb0/Internal\ shared\ storage'
+
+QT_STYLE_OVERIDE=GTK+
